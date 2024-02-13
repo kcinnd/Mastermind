@@ -1,0 +1,114 @@
+/* Basic page styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+/* Styling for the instructions toggle button */
+#toggleInstructions {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+#toggleInstructions:hover {
+    background-color: #0056b3;
+}
+
+/* Styling for the instructions section */
+#gameInstructions {
+    display: none; /* Initially hidden */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#gameInstructions h2 {
+    color: #333;
+}
+
+#gameInstructions p, #gameInstructions ul {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Styling for the game board */
+#gameBoard {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr); /* Adjust based on your layout */
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.peg, .feedbackPeg {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.feedbackPeg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Add specific colors for pegs */
+.red { background-color: red; }
+.blue { background-color: blue; }
+.green { background-color: green; }
+.yellow { background-color: yellow; }
+.purple { background-color: purple; }
+.orange { background-color: orange; }
+.cyan { background-color: cyan; }
+.magenta { background-color: magenta; }
+.lime { background-color: lime; }
+.pink { background-color: pink; }
+
+/* Feedback pegs for black and white indicators */
+.black { background-color: black; }
+.white { background-color: white; }
+
+/* Styling for color selection area */
+#colorSelection {
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#colorSelection .peg {
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+#colorSelection .peg:hover {
+    border-color: #aaa;
+}
