@@ -1,0 +1,118 @@
+/* Basic page styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding-top: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+/* Instructions toggle button */
+#toggleInstructions {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#toggleInstructions:hover {
+    background-color: #0056b3;
+}
+
+/* Instructions content */
+#gameInstructions {
+    display: none; /* Initially hidden */
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 80%;
+    max-width: 600px;
+}
+
+/* Color selection area in a 5x2 grid */
+#colorSelection {
+    display: grid;
+    grid-template-columns: repeat(5, 50px); /* 5 columns */
+    grid-template-rows: repeat(2, 50px); /* 2 rows */
+    gap: 10px; /* Space between pegs */
+    justify-content: center; /* Center the grid */
+    margin-bottom: 20px; /* Space above the grid */
+}
+
+/* Game board in a 5x8 grid */
+#gameBoard {
+    display: grid;
+    grid-template-columns: repeat(5, 50px); /* 5 columns */
+    grid-auto-rows: 50px; /* Row height */
+    gap: 10px; /* Space between pegs */
+    margin-bottom: 20px; /* Space below the game board */
+}
+
+/* Pegs and peg slots */
+.peg, .pegSlot {
+    width: 50px; /* Size of pegs */
+    height: 50px;
+    border-radius: 50%; /* Circular pegs */
+    border: 2px solid #ddd; /* Peg border */
+    cursor: pointer; /* Clickable */
+}
+
+.pegSlot {
+    background-color: #e0e0e0; /* Light grey to distinguish empty slots */
+}
+
+/* Specific colors for pegs */
+.red { background-color: red; }
+.blue { background-color: blue; }
+.green { background-color: green; }
+.yellow { background-color: yellow; }
+.purple { background-color: purple; }
+.orange { background-color: orange; }
+.cyan { background-color: cyan; }
+.magenta { background-color: magenta; }
+.lime { background-color: lime; }
+.pink { background-color: pink; }
+
+/* Feedback pegs */
+.feedbackContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px; /* Space between the guess row and feedback pegs */
+}
+
+.feedbackPeg {
+    width: 15px; /* Size of feedback pegs */
+    height: 15px;
+    border-radius: 50%; /* Make pegs circular */
+    margin: 2px; /* Space between feedback pegs */
+}
+
+.black { background-color: black; }
+.white { background-color: white; }
+
+/* Submit guess button */
+#submitGuessBtn {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px; /* Space above the button */
+}
+
+#submitGuessBtn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
