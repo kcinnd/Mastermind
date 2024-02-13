@@ -1,0 +1,97 @@
+/* Basic page styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+/* Instructions toggle button */
+#toggleInstructions {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#toggleInstructions:hover {
+    background-color: #0056b3;
+}
+
+/* Instructions content */
+#gameInstructions {
+    display: none; /* Initially hidden */
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+/* Game board styling */
+#gameBoard {
+    display: flex;
+    flex-direction: column; /* Stack rows vertically */
+    gap: 10px; /* Space between rows */
+}
+
+.row {
+    display: flex; /* Align pegs horizontally within each row */
+    justify-content: center; /* Center the pegs within the row */
+    gap: 5px; /* Space between pegs */
+}
+
+/* Base styling for peg slots and color pegs */
+.peg, .pegSlot {
+    width: 30px; /* Width of each peg */
+    height: 30px; /* Height of each peg */
+    border-radius: 50%; /* Make pegs circular */
+    border: 2px solid #ddd; /* Peg border */
+    cursor: pointer; /* Change cursor to indicate clickable pegs */
+}
+
+.pegSlot {
+    background-color: #e0e0e0; /* Light grey to distinguish empty slots */
+}
+
+/* Color selection area styled as a 2x5 grid */
+#colorSelection {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns */
+    grid-template-rows: repeat(2, 30px); /* 2 rows, each 30px high */
+    gap: 10px; /* Space between pegs */
+    justify-content: center; /* Center the grid */
+    margin-top: 20px; /* Space above the grid */
+}
+
+/* Individual color styles for pegs */
+.red { background-color: red; }
+.blue { background-color: blue; }
+.green { background-color: green; }
+.yellow { background-color: yellow; }
+.purple { background-color: purple; }
+.orange { background-color: orange; }
+.cyan { background-color: cyan; }
+.magenta { background-color: magenta; }
+.lime { background-color: lime; }
+.pink { background-color: pink; }
+
+/* Feedback pegs styling */
+.feedbackPeg {
+    width: 20px; /* Width of each feedback peg */
+    height: 20px; /* Height of each feedback peg */
+    border-radius: 50%; /* Make feedback pegs circular */
+}
+
+.black { background-color: black; } /* Black pegs for correct color and position */
+.white { background-color: white; } /* White pegs for correct color, wrong position */
