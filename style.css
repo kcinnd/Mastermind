@@ -54,9 +54,8 @@ h1 {
 /* Game board styling */
 #gameBoard {
     display: grid;
-    grid-template-columns: repeat(5, 50px); /* 5 columns for the pegs */
-    grid-auto-rows: 50px; /* Auto row height to maintain grid layout */
-    gap: 10px; /* Space between pegs */
+    grid-template-columns: repeat(5, 50px) auto; /* 5 columns for pegs + 1 for feedback */
+    gap: 10px; /* Space between pegs and feedback */
     margin-bottom: 20px;
 }
 
@@ -86,9 +85,10 @@ h1 {
 /* Feedback pegs */
 .feedbackContainer {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column; /* Align feedback pegs vertically */
+    justify-content: center; /* Center feedback pegs vertically */
     gap: 5px; /* Space between feedback pegs */
+    padding-left: 10px; /* Space between the last peg and the feedback pegs */
 }
 
 .feedbackPeg {
