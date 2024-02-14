@@ -87,8 +87,8 @@ document.addEventListener('DOMContentLoaded', function() {
             whitePeg.classList.add('feedbackPeg', 'white');
             feedbackContainer.appendChild(whitePeg);
         }
-        // Append feedback container to the last peg slot in the row
-        gameBoard.children[startIndex + 4].appendChild(feedbackContainer);
+        // Insert the feedback container next to the last peg of the current row in the grid
+        gameBoard.insertBefore(feedbackContainer, gameBoard.children[startIndex + 5]);
     }
 
     function compareGuessToSecret(guess, secret) {
