@@ -53,9 +53,9 @@ document.addEventListener('DOMContentLoaded', function() {
         rows.forEach((row, index) => {
             const pegSlots = row.children;
             for (let pegSlot of pegSlots) {
-                pegSlot.removeEventListener('click', handlePegSlotClick); // Remove existing event listeners to avoid duplicates
+                pegSlot.removeEventListener('click', handlePegSlotClick); // Clear previous event listeners
                 if (index === rowIndex) {
-                    pegSlot.addEventListener('click', handlePegSlotClick);
+                    pegSlot.addEventListener('click', handlePegSlotClick); // Add new event listener
                 }
             }
         });
@@ -74,7 +74,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function checkRowCompletion() {
         const row = gameBoard.children[currentRow].querySelector('.row');
-        submitGuessBtn.disabled = Array.from(row.children).some(peg => peg.classList.contains('pegSlot'));
+        const isComplete = Array.from(row.children).every(peg => !peg.classList.contains('pegSlot'));
+        submitGuessBtn.disabled = !isComplete;
     }
 
     submitGuessBtn.addEventListener('click', function() {
@@ -112,8 +113,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function compareGuessToSecret(guess, secret) {
-        let black = 0;
-        let white = 0;
+        let black = 0; // Correct color and position
+        let white = 0; // Correct color but wrong position
         let secretCopy = [...secret];
         let guessCopy = [...guess];
 
