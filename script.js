@@ -31,16 +31,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function setupGameBoard() {
         gameBoard.innerHTML = ''; // Clear the game board
-        for (let i = 0; i < 40; i++) { // Create 40 peg slots directly
-            const pegSlot = document.createElement('div');
-            pegSlot.className = 'peg pegSlot';
-            pegSlot.addEventListener('click', function() {
-                if (selectedColor && Math.floor(i / 5) === currentRow) {
-                    this.className = `peg ${selectedColor}`;
-                    checkRowCompletion();
-                }
-            });
-            gameBoard.appendChild(pegSlot); // Append the peg slot directly to the game board
+        for (let i = 0; i < 8; i++) { // Creating 8 row wrappers for the game board
+            const rowWrapper = document.createElement('div');
+            rowWrapper.className = 'rowWrapper';
+
+            const row = document.createElement('div');
+            row.className = 'row';
+            for (let j = 0; j < 5; j++) { // Each row should have 5 peg slots
+                const pegSlot = document.createElement('div');
+                pegSlot.className = 'peg pegSlot';
+                pegSlot.addEventListener('click', function() {
+                    if (selectedColor && Math.floor(i / 5) === currentRow) {
+                        this.className = `peg ${selectedColor}`;
+                        checkRowCompletion();
+                    }
+                });
+                row.appendChild(pegSlot); // Append peg slot to the row
+            }
+
+            rowWrapper.appendChild(row); // Append the row to the row wrapper
+            gameBoard.appendChild(rowWrapper); // Append the row wrapper to the game board
         }
     }
 
@@ -50,18 +60,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function checkRowCompletion() {
         const startIndex = currentRow * 5;
-        const endIndex = startIndex + 5;
-        const rowPegs = Array.from(gameBoard.children).slice(startIndex, endIndex);
+        const rowPegs = Array.from(gameBoard.children[currentRow].querySelector('.row').children);
         submitGuessBtn.disabled = rowPegs.some(peg => peg.classList.contains('pegSlot'));
     }
 
     submitGuessBtn.addEventListener('click', function() {
-        const startIndex = currentRow * 5;
-        const endIndex = startIndex + 5;
-        const rowPegs = Array.from(gameBoard.children).slice(startIndex, endIndex);
+        const rowPegs = Array.from(gameBoard.children[currentRow].querySelector('.row').children);
         const guess = rowPegs.map(peg => peg.classList[1]);
         const feedback = compareGuessToSecret(guess, secretCode);
-        displayFeedback(feedback, startIndex);
+        displayFeedback(feedback, currentRow);
 
         if (feedback.black === 5) {
             setTimeout(() => alert('Congratulations! You cracked the code!'), 100);
@@ -74,26 +81,27 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    function displayFeedback(feedback, startIndex) {
+    function displayFeedback(feedback, rowIndex) {
         const feedbackContainer = document.createElement('div');
-        feedbackContainer.classList.add('feedbackContainer');
+        feedbackContainer.className = 'feedbackContainer';
         for (let i = 0; i < feedback.black; i++) {
             const blackPeg = document.createElement('div');
-            blackPeg.classList.add('feedbackPeg', 'black');
+            blackPeg.className = 'feedbackPeg black';
             feedbackContainer.appendChild(blackPeg);
         }
         for (let i = 0; i < feedback.white; i++) {
             const whitePeg = document.createElement('div');
-            whitePeg.classList.add('feedbackPeg', 'white');
+            whitePeg.className = 'feedbackPeg white';
             feedbackContainer.appendChild(whitePeg);
         }
-        // Insert the feedback container next to the last peg of the current row in the grid
-        gameBoard.insertBefore(feedbackContainer, gameBoard.children[startIndex + 5]);
+
+        // Append the feedback container to the corresponding rowWrapper
+        gameBoard.children[rowIndex].appendChild(feedbackContainer);
     }
 
     function compareGuessToSecret(guess, secret) {
-        let black = 0;
-        let white = 0;
+        let black = 0; // Correct color and position
+        let white = 0; // Correct color but wrong position
         let secretCopy = [...secret];
         let guessCopy = [...guess];
 
