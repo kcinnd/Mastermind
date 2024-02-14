@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
             rowWrapper.appendChild(row);
             gameBoard.appendChild(rowWrapper);
         }
+        // Make only the first row interactive
         makeRowInteractive(currentRow);
     }
 
@@ -53,9 +54,10 @@ document.addEventListener('DOMContentLoaded', function() {
         rows.forEach((row, index) => {
             const pegSlots = row.children;
             for (let pegSlot of pegSlots) {
-                pegSlot.removeEventListener('click', handlePegSlotClick); // Clear previous event listeners
+                pegSlot.classList.add('pegSlot'); // Ensure class is correct
+                pegSlot.removeEventListener('click', handlePegSlotClick); // Remove previous listeners
                 if (index === rowIndex) {
-                    pegSlot.addEventListener('click', handlePegSlotClick); // Add new event listener
+                    pegSlot.addEventListener('click', handlePegSlotClick); // Add listener to current row
                 }
             }
         });
@@ -74,8 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function checkRowCompletion() {
         const row = gameBoard.children[currentRow].querySelector('.row');
-        const isComplete = Array.from(row.children).every(peg => !peg.classList.contains('pegSlot'));
-        submitGuessBtn.disabled = !isComplete;
+        submitGuessBtn.disabled = Array.from(row.children).some(peg => peg.classList.contains('pegSlot'));
     }
 
     submitGuessBtn.addEventListener('click', function() {
@@ -92,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 100);
         } else {
             currentRow++;
-            makeRowInteractive(currentRow);
+            makeRowInteractive(currentRow); // Activate the next row
         }
     });
 
@@ -113,8 +114,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function compareGuessToSecret(guess, secret) {
-        let black = 0; // Correct color and position
-        let white = 0; // Correct color but wrong position
+        let black = 0;
+        let white = 0;
         let secretCopy = [...secret];
         let guessCopy = [...guess];
 
@@ -137,8 +138,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function resetGame() {
         currentRow = 0;
-        setupGameBoard();
-        submitGuessBtn.disabled = true;
-        selectedColor = '';
+        setupGameBoard(); // Re-setup the game board for a new game
+        submitGuessBtn.disabled = true; // Disable the submit button until a guess is made
+        selectedColor = ''; // Reset the selected color
     }
 });
