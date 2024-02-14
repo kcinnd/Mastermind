@@ -53,10 +53,20 @@ h1 {
 
 /* Game board styling */
 #gameBoard {
-    display: grid;
-    grid-template-columns: repeat(5, 50px) auto; /* 5 columns for pegs + 1 for feedback */
-    gap: 10px; /* Space between pegs and feedback */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between rows */
     margin-bottom: 20px;
+}
+
+.rowWrapper {
+    display: flex; /* Allows side-by-side peg row and feedback */
+    align-items: center; /* Centers the row and feedback vertically */
+}
+
+.row {
+    display: flex; /* Ensures pegs are in a horizontal row */
+    gap: 10px; /* Space between pegs */
 }
 
 .peg, .pegSlot {
